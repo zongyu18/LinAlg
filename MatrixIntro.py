@@ -19,3 +19,9 @@ def scalarRow(M, row, scalar):
   except:
     print("Make sure that your scalar multiple is valid!")
 
+def sumRow(M, rowOne, rowTwo, scalar):
+  try:
+    for i in range (len(M[row])):
+      M[rowOne][i] += float(scalar) * M[rowTwo][i]
+  except:
+    print("Make sure that your scalar multiple is valid!"
