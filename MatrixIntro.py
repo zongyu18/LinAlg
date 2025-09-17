@@ -24,4 +24,7 @@ def sumRow(M, rowOne, rowTwo, scalar):
     for i in range (len(M[row])):
       M[rowOne][i] += float(scalar) * M[rowTwo][i]
   except:
-    print("Make sure that your scalar multiple is valid!"
+    print("Make sure that your scalar multiple is valid!")
+
+def interchange(M, rowOne, rowTwo):
+  M[rowOne], M[rowTwo] = M[rowTwo], M[rowOne]
