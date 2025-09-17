@@ -69,15 +69,17 @@ def REF(M):
     for i in range(len(M)):
         for j in range(len(M[0])):
             M[i][j] = round(M[i][j], 1)
-    while (not checkREF(M)):
-        for i in range(len(M)):
-            allZero = False
-            for j in range(len(M[0])):
-                if M[i][j] != 0:
-                    break
-                else:
-                    if j == len(M[0]) - 1 and i < len(M) - 1:
-                        interchange(M, i, i+1)
+    for i in range(len(M) - 1, -1):
+        for j in range(len(M[0])):
+            if M[i][j] != 0:
+                break
+            else:
+                if j == len(M[0]) - 1 and i > 0:
+                    interchange(M, i, i-1)
+
+def RREF(M):
+    REF(M)
+
 r_1 = [0, 0, 0]
 r_2 = [3, 6, 0]
 r_3 = [0, 0, 0]
