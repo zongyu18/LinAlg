@@ -25,7 +25,7 @@ def sumRow(M, rowOne, rowTwo, scalar):
     for i in range (len(M[rowTwo])):
       M[rowTwo][i] += float(scalar) * M[rowOne][i]
   except:
-    print("Make sure that your input is valid!")
+    print("Make sure that your input is valid!" + str(rowTwo))
 
 # Interchange two rows of the matrix
 def interchange(M, rowOne, rowTwo):
@@ -51,12 +51,36 @@ def checkREF(M):
 def REF(M):
     rowPointer = 0
     colPointer = 0
-    tempRowPointer = 0
-    tempColPointer = 0
-
-r_1 = [1, 152323, 9, 10]
-r_2 = [0, 1, 7, 10, 10]
-r_3 = [0, 0, 1, 10, 10]
-r_4 = [0, 0, 0, 0, 1]
+    tempRowPointer = -1
+    while rowPointer < len(M) and colPointer < len(M[rowPointer]):
+        for i in range(rowPointer, len(M)):
+            if M[i][colPointer] != 0:
+                tempRowPointer = i
+                break
+        if tempRowPointer != -1:
+            if tempRowPointer != rowPointer:
+                interchange(M, tempRowPointer, rowPointer)
+            tempRowPointer = -1
+            scalarRow(M, rowPointer, M[rowPointer][colPointer] ** (-1))
+            for j in range(rowPointer + 1, len(M)):
+                sumRow(M, rowPointer, j, M[i][colPointer] * (-1))
+        rowPointer += 1
+        colPointer += 1
+    for i in range(len(M)):
+        for j in range(len(M[0])):
+            M[i][j] = round(M[i][j], 1)
+    while (not checkREF(M)):
+        for i in range(len(M)):
+            allZero = False
+            for j in range(len(M[0])):
+                if M[i][j] != 0:
+                    break
+                else:
+                    if j == len(M[0]) - 1 and i < len(M) - 1:
+                        interchange(M, i, i+1)
+r_1 = [0, 0, 0]
+r_2 = [3, 6, 0]
+r_3 = [0, 0, 0]
 M = [r_1, r_2, r_3]
-print(checkREF(M))
+REF(M)
+print(tabulate(M))
