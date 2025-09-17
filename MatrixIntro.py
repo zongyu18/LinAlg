@@ -81,9 +81,9 @@ def RREF(M):
                 sumRow(M, rowPointer, i, M[i][pivotPointer] * -1)
         rowPointer -= 1
 
-r_1 = [1, 2, -1, -4]
-r_2 = [-2, 4, -1, 6]
-r_3 = [2, 2, 3, 1]
+r_1 = [4, 2]
+r_2 = [3, 2]
+r_3 = [1, 5]
 M = [r_1, r_2, r_3]
 RREF(M)
 print(tabulate(M))
