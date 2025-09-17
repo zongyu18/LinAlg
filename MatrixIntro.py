@@ -11,3 +11,11 @@ def returnRow(M, row):
 def returnCol(M, col):
   return M[col]
 
+def scalarRow(M, row, scalar):
+  try:
+    if scalar != 0:
+      for i in range(len(M[row])):
+        M[row][i] *= float(scalar)
+  except:
+    print("Make sure that your scalar multiple is valid!")
+
