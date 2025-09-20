@@ -96,21 +96,18 @@ def userInput():
             currentCol = 0
             while currentCol < cols:
                 try:
+                    M[currentRow][currentCol] = "?"
+                    print((tabulate(M)))
                     M[currentRow][currentCol] = float(input("Enter the next element: "))
                     currentCol += 1
                 except:
                     print("Invalid")
             currentRow += 1
-        print((tabulate(M)))
+        print(tabulate(M))
+        print("----------------------------------------")
+        print("RREF FORM")
+        RREF(M)
+        print(tabulate(M))
     except:
         userInput()
-
-r_1 = [5, 3, 5, 1, 2]
-r_2 = [3, 14, 12, 2, 1]
-r_3 = [1, 2, 5, 6, 9]
-r_4 = [4, 1, 5, -6, 2]
-M = [[]]
 userInput()
-print(tabulate(M))
-RREF(M)
-print(tabulate(M))
