@@ -81,9 +81,36 @@ def RREF(M):
                 sumRow(M, rowPointer, i, M[i][pivotPointer] * -1)
         rowPointer -= 1
 
-r_1 = [4, 2]
-r_2 = [3, 2]
-r_3 = [1, 5]
-M = [r_1, r_2, r_3]
+def userInput():
+    try:
+        rows = int(input("Number of rows: "))
+        cols = int(input("Number of columns: "))
+        currentRow = 0
+        currentCol = 0
+        M = []
+        for i in range(rows):
+            M.append([])
+            for j in range(cols):
+                M[i].append("-")
+        while currentRow < rows:
+            currentCol = 0
+            while currentCol < cols:
+                try:
+                    M[currentRow][currentCol] = float(input("Enter the next element: "))
+                    currentCol += 1
+                except:
+                    print("Invalid")
+            currentRow += 1
+        print((tabulate(M)))
+    except:
+        userInput()
+
+r_1 = [5, 3, 5, 1, 2]
+r_2 = [3, 14, 12, 2, 1]
+r_3 = [1, 2, 5, 6, 9]
+r_4 = [4, 1, 5, -6, 2]
+M = [[]]
+userInput()
+print(tabulate(M))
 RREF(M)
 print(tabulate(M))
