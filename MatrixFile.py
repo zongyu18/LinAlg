@@ -80,7 +80,19 @@ def RREF(M):
             for i in range(0, rowPointer):
                 sumRow(M, rowPointer, i, M[i][pivotPointer] * -1)
         rowPointer -= 1
-
+      
+def rowEquivalence(M, N):
+  try:
+    if len(M) != len(N) or len(M[0]) != len(N[0]):
+      return False
+  except:
+    return False
+  for i in range(len(M)):
+    for j in range(len(M[0])):
+      if M[i][j] != N[i][j]:
+        return False
+  return True      
+'''
 def userInput():
     try:
         rows = int(input("Number of rows: "))
@@ -111,3 +123,4 @@ def userInput():
     except:
         userInput()
 userInput()
+'''
