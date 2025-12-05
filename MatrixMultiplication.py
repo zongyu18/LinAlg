@@ -25,3 +25,15 @@ def dotProduct(M, N):
   except:
     print("The inputted vectors could not be dotted.")
     return False
+
+def matrixMultiplicationElement(M, N, i, j):
+  try:
+    vectorOne = M[i]
+    rowNum = rows(M)
+    tempList = []
+    for k in range(rowNum):
+      tempList.append(N[k][j])
+    return dotProduct(vectorOne, tempList)
+  except:
+    print("Your request could not be processed. Please try again.")
+    return False
