@@ -15,3 +15,13 @@ def validMultiplication(M, N):
       return False
   except:
     return False
+
+def dotProduct(M, N):
+  sum = 0
+  try:
+    for i in range(len(M))):
+      sum += M[i] * N[i]
+    return sum
+  except:
+    print("The inputted vectors could not be dotted.")
+    return False
