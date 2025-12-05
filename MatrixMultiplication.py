@@ -1,3 +1,5 @@
+M = [[1,2], [0,-1],[3,4]]
+N = [[2, 5], [3, 4]]
 def rows(M):
   return len(M)
 
@@ -19,7 +21,7 @@ def validMultiplication(M, N):
 def dotProduct(M, N):
   sum = 0
   try:
-    for i in range(len(M))):
+    for i in range(len(M)):
       sum += M[i] * N[i]
     return sum
   except:
@@ -31,9 +33,11 @@ def matrixMultiplicationElement(M, N, i, j):
     vectorOne = M[i]
     rowNum = rows(M)
     tempList = []
-    for k in range(rowNum):
+    for k in range(cols(M)):
       tempList.append(N[k][j])
     return dotProduct(vectorOne, tempList)
   except:
     print("Your request could not be processed. Please try again.")
     return False
+    
+print(matrixMultiplicationElement(M, N,0,0))
