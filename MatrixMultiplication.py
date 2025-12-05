@@ -31,7 +31,6 @@ def dotProduct(M, N):
 def matrixMultiplicationElement(M, N, i, j):
   try:
     vectorOne = M[i]
-    rowNum = rows(M)
     tempList = []
     for k in range(cols(M)):
       tempList.append(N[k][j])
@@ -39,5 +38,12 @@ def matrixMultiplicationElement(M, N, i, j):
   except:
     print("Your request could not be processed. Please try again.")
     return False
-    
-print(matrixMultiplicationElement(M, N,0,0))
+
+def matrixMultiplication(M, N):
+  tempList = []
+  for k in range(rows(M)):
+    tempList.append([])
+    for l in range(cols(N)):
+      tempList[k].append(matrixMultiplicationElement(M, N, k, l))
+  return tempList
+print(matrixMultiplication(M, N))
