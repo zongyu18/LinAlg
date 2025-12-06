@@ -1,3 +1,6 @@
+import copy
+import tabulate
+
 M = [[1,2], [0,-1],[3,4]]
 N = [[2, 5], [3, 4]]
 def rows(M):
@@ -46,4 +49,41 @@ def matrixMultiplication(M, N):
     for l in range(cols(N)):
       tempList[k].append(matrixMultiplicationElement(M, N, k, l))
   return tempList
-print(matrixMultiplication(M, N))
+
+def transpose(M):
+    tempList = []
+    row = rows(M)
+    col = cols(M)
+    for i in range(col):
+        tempList.append([])
+        for j in range(row):
+            tempList[i].append(M[j][i])
+    return tempList
+
+def convertZ2(M):
+    for i in range(rows(M)):
+        for j in range(cols(M)):
+            M[i][j] %= 2
+    return M
+
+def multiplyZ2(M, N):
+    return matrixMultiplication(convertZ2(M), convertZ2(N))
+
+print("The results of multiplying M by N")
+print("-----------------------------------")
+print(tabulate.tabulate(matrixMultiplication(M, N)))
+print("Original Matrix")
+print("-----------------------------------")
+print(tabulate.tabulate(M))
+print("Transposed Matrix")
+print("-----------------------------------")
+print(tabulate.tabulate(transpose(M)))
+print("Original Matrix")
+print("-----------------------------------")
+print(tabulate.tabulate(M))
+print("Converted Matrix")
+print("-----------------------------------")
+print(tabulate.tabulate(convertZ2(M)))
+print("Converted Matrix Multiplication")
+print("-----------------------------------")
+print(tabulate.tabulate(multiplyZ2(M, N)))
