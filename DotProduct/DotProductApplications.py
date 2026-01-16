@@ -35,7 +35,7 @@ for index, row, in fruits.iterrows():
     nutritionalVectors.append(nutritionalVector) # adding the vector to list of all vectors
 
 # using the dot product to calculate similarity between two fruit vectors (by looking at the angle between them)
-def similarity(indexOne, indexTwo):
+def similarityHelper(indexOne, indexTwo):
     # identify the two vectors
     v1 = nutritionalVectors[indexOne]
     v2 = nutritionalVectors[indexTwo]
@@ -44,5 +44,11 @@ def similarity(indexOne, indexTwo):
     magnitudeOne = np.linalg.norm(v1)
     magnitudeTwo = np.linalg.norm(v2)
     # divide the dot product by the magnitudes of the vectors to get the cosine of the angle
-    return np.arccos((dotProduct / (magnitudeOne * magnitudeTwo)))
-print(similarity(2, 2))
+    return (np.pi - np.arccos((dotProduct / (magnitudeOne * magnitudeTwo)))) / np.pi * 100
+
+def similarity(index):
+    # finding the similarity between one fruit vector and all other fruit vectors
+    list = []
+    for i in range(len(fruit_names)):
+        if i != index:
+            list.append([similarityHelper(index, i)], fruit_names[i])
