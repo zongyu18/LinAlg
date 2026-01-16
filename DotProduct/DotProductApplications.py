@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import csv
 import itertools
+import matplotlib
+import matplotlib.pyplot as plt
 
 # reading the csv file
 fruits = pd.read_csv('fruits.csv')
@@ -14,6 +16,9 @@ for index, row in fruits.iterrows():
     if " nutrition" in current_fruit: # cleaning the names up for consistency
         new_current_fruit = current_fruit.split(" nutrition")
         current_fruit = new_current_fruit[0]
+    elif "nutriion: " in current_fruit:
+        new_current_fruit = current_fruit.split("nutriion: ")
+        current_fruit = new_current_fruit[1]
     fruit_names.append(current_fruit)
 
 # iterating through csv file to create vectors for every fruit (each component is a different nutritional value)
@@ -53,7 +58,26 @@ def similarity(index):
         if i != index:
             list.append([similarityHelper(index, i), fruit_names[i]])
     list.sort()
-    list.reverse()
-    return list
-print(similarity(1)[0][0])
-print(similarityHelper(1, 28))
+    list.reverse() # sorting the list by most similar fruits
+    # code to create graph of best and worst substitutes
+    bestFruits = np.array([list[0][1], list[1][1], list[2][1], list[len(list)-2][1], list[len(list)-1][1]])
+    bestFruitsValues = np.array([list[0][0], list[1][0], list[2][0], list[len(list)-2][0], list[len(list)-1][0]])
+    plt.bar(bestFruits, bestFruitsValues, color=plt.get_cmap("viridis").colors)
+    plt.xlabel("Fruits")
+    plt.ylabel("Similarity (%)")
+    plt.title("Best and Worst Nutritional Substitutes For " + fruit_names[index])
+    plt.show()
+
+# method that asks for user input and runs the helper methods
+def main():
+    try:
+        print("")
+        for i in range(len(fruit_names)):
+            print("(" + str(i) +") " + fruit_names[i], end = '   ')
+        print("")
+        print("")
+        index = int(input("Enter the index of a fruit you would like a nutritional substitute for: ")) # user input
+        similarity(index) # helper method
+    except:
+        print("Your index is invalid!")
+main()
