@@ -44,11 +44,16 @@ def similarityHelper(indexOne, indexTwo):
     magnitudeOne = np.linalg.norm(v1)
     magnitudeTwo = np.linalg.norm(v2)
     # divide the dot product by the magnitudes of the vectors to get the cosine of the angle
-    return (np.pi - np.arccos((dotProduct / (magnitudeOne * magnitudeTwo)))) / np.pi * 100
+    return round((np.pi - np.arccos((dotProduct / (magnitudeOne * magnitudeTwo)))) / np.pi * 100, 4)
 
 def similarity(index):
     # finding the similarity between one fruit vector and all other fruit vectors
     list = []
     for i in range(len(fruit_names)):
         if i != index:
-            list.append([similarityHelper(index, i)], fruit_names[i])
+            list.append([similarityHelper(index, i), fruit_names[i]])
+    list.sort()
+    list.reverse()
+    return list
+print(similarity(1)[0][0])
+print(similarityHelper(1, 28))
