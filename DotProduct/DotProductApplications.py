@@ -59,13 +59,34 @@ def similarity(index):
             list.append([similarityHelper(index, i), fruit_names[i]])
     list.sort()
     list.reverse() # sorting the list by most similar fruits
-    # code to create graph of best and worst substitutes
+
+    # code to create graph of best and worst substitutes, as well as making the graph look nicer
     bestFruits = np.array([list[0][1], list[1][1], list[2][1], list[len(list)-2][1], list[len(list)-1][1]])
     bestFruitsValues = np.array([list[0][0], list[1][0], list[2][0], list[len(list)-2][0], list[len(list)-1][0]])
-    plt.bar(bestFruits, bestFruitsValues, color=plt.get_cmap("viridis").colors)
+
+    ###
+
+    # this portion of the code was taken from
+    # https://stackoverflow.com/questions/64068659/bar-chart-in-matplotlib-using-a-colormap
+    my_cmap = plt.get_cmap("coolwarm")
+    rescale = lambda bestFruitsValues: (bestFruitsValues - np.min(bestFruitsValues)) / (np.max(bestFruitsValues) - np.min(bestFruitsValues))
+
+    ###
+
+    plt.bar(bestFruits, bestFruitsValues, color=my_cmap(rescale(bestFruitsValues)))
     plt.xlabel("Fruits")
     plt.ylabel("Similarity (%)")
     plt.title("Best and Worst Nutritional Substitutes For " + fruit_names[index])
+
+    ###
+
+    # this portion of the code was taken from
+    # https://www.youtube.com/watch?v=nKyZ8mgaeXQ
+    for i, v in enumerate(bestFruitsValues):
+        plt.text(i, v + 0.30, str(v), ha = "center", size = 8, weight="bold")
+
+    ###
+
     plt.show()
 
 # method that asks for user input and runs the helper methods
